@@ -35,7 +35,7 @@ class Inventory {
     public updateItem = catchAsync(async(req:Request, res:Response, next:NextFunction) => {
         try {
         const { id } = req.params;
-            const updatedItem = await Item.findByIdAndUpdate(id, req.body, { new: true });
+            const updatedItem = await Item.findByIdAndUpdate(id, req.body, { new: true, runValidators: true});
             if (!updatedItem) throw new AppError('Item not found', 404);
 
             return sendSuccess(res, 200, {

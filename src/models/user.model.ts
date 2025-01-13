@@ -26,10 +26,10 @@ const userSchema = new Schema<IUser>({
   resetToken: {
     type: String,
   },
-//   verifiedEmail: {
-//     type: Boolean,
-//     default: false,
-//   },
+  verifiedEmail: {
+    type: Boolean,
+    default: false,
+  },
   roles: {
     type: [String],
     required: true,
