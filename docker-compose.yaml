@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  trume-api:
+    container_name: softalliance-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - ${PORT}:${PORT}
+    restart: always
+    volumes:
+      - .:/usr/src/softalliance-project
+    depends_on:
+      - alliance-mongo:
+        condition: service_healthy
+    env_file:
+      - .env
+    networks:
+      - rabbitmq_nodejs
+volumes:
+ softalliance-mongo: {}
