@@ -43,7 +43,7 @@ class AuthController {
 
     if (user) {
       return sendSuccess(res, 201, {
-        message: "Check your email for a verification otp!",
+        message: "User created!",
         user,
       });
     });
