@@ -21,7 +21,7 @@ This application is a TypeScript-based platform that handles user authentication
 - Inventory Management:
 - CRUD API for Inventory Management
 - Manage inventory items through authenticated Create, Read, Update, and Delete operations.
-## Payments:
+# Payments:
 - Payments API Integration
 - Integration with payment gateways like Paystack to handle transactions.
 - Easy account creation and access to keys.
@@ -42,7 +42,7 @@ This application is a TypeScript-based platform that handles user authentication
 - Clone the repository:
 - git clone https://github.com/Olukeye/softalliance-Assessment-Test.git
 - cd repository-name
-- Install dependencies:
+- Install dependencies: npm i
 # Environment Variables
 * Create a .env file in the project root and include the following variables:
 * Copy code
