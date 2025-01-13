@@ -39,7 +39,7 @@ class AuthController {
 
     if (user) {
       return sendSuccess(res, 201, {
-        message: "Check your email for a verification otp!",
+        message: "User created!",
         user,
       });
     } else {
@@ -69,6 +69,7 @@ class AuthController {
     });
     
   });
+
   public forgotPassword = catchAsync(async (req: Request, res: Response) => {
     const resetLink = passLink;
     const { email } = req.body;
