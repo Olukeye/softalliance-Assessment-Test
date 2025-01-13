@@ -1,4 +1,4 @@
-# softalliance-Assessment-Tes
+# softalliance-Assessment-Test
 
 # Description
 This application is a TypeScript-based platform that handles user authentication, inventory management, and payments, with additional functionalities such as password recovery and webhook-based purchase status updates.
@@ -21,33 +21,26 @@ This application is a TypeScript-based platform that handles user authentication
 - Inventory Management:
 - CRUD API for Inventory Management
 - Manage inventory items through authenticated Create, Read, Update, and Delete operations.
-- - Payments:
+## Payments:
 - Payments API Integration
 - Integration with payment gateways like Paystack or Flutterwave (FLW) to handle transactions.
 - Easy account creation and access to keys.
 - Payment processing for goods and services.
-- - Webhook:
+## Webhook:
 - Purchase Status Update Webhook
 - Create a webhook to automatically mark purchases as paid upon successful payment.
 ## Tech Stack
-Language: TypeScript
-Database: (MongoDB)
+* Language: TypeScript
+* Database: (MongoDB)
 ## Tools & Frameworks: 
 - Node.js
 - Express
 - Docker
 ## Payment Gateway: 
 - Paystack
-
-
-## Setup Instructions
-# Prerequisites
-- Node.js (v19+)
-- Docker (optional but recommended)
-- Git
 # # Installation
 - Clone the repository:
-- git clone https://github.com/username/repository-name.git
+- git clone https://github.com/Olukeye/softalliance-Assessment-Test.git
 - cd repository-name
 - Install dependencies:
 # bash
@@ -56,16 +49,17 @@ Database: (MongoDB)
 - Environment Variables
 * Create a .env file in the project root and include the following variables:
 * Copy code
-* PORT=<Application Port>
-* DB_URI=<MongoDB Connection URI>
+* PORT=your server Port
+* DB_URL= MongoDB Connection URI
 * JWT_SECRET=<Your JWT Secret>
-* PAYSTACK_SECRET_KEY=<Your Paystack Secret Key>
-* AUTH_CODE_EXPIRY=<Auth Code Expiration Time>
-* HOST= <amtp provider>
-* SERVICE= <gmail>
-* GMAIL_PORT= <Your port>
-* EMAIL_USERNAME= <Your email>
-* EMAIL_PASSWORD= <password>
+* PAYSTACK_SECRET_KEY=Your Paystack Secret Key
+* PAYSTACK_PUBLIC_KEY=Your Paystack public key
+* JWT_EXPIRES_IN=Auth Code Expiration Time
+* HOST= amtp provider
+* SERVICE= gmail
+* GMAIL_PORT= Your port
+* EMAIL_USERNAME= Your email
+* EMAIL_PASSWORD= config password
 * Running the Application using nodemon
 
 ## Using Docker
