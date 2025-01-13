@@ -6,8 +6,7 @@ const authController = new AuthController()
 
 AuthRouter.post('/register', authController.Register);
 AuthRouter.post('/login', authController.Login)
-AuthRouter.post("/resendotp", authController.resendotp);
-AuthRouter.post('/forgotPassword/token', authController.forgotPassword)
+AuthRouter.post('/forgotPassword', authController.forgotPassword)
 AuthRouter.patch("/reset-password/:resetToken", authController.resetPassword);
 
 export default AuthRouter;

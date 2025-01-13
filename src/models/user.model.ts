@@ -13,6 +13,7 @@ export interface IUser extends Document {
   comparePassword: (enteredPassword: string) => boolean;
   resetToken?: string;
   tokenExpiry?: Date;
+  _doc:any;
 }
 
 const userSchema = new Schema<IUser>({

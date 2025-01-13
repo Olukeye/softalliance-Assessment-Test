@@ -6,11 +6,7 @@ import { sendSuccess } from "../utils/response";
 import AppError from "../utils/appError";
 import { catchAsync } from "../utils/catchAsync";
 import passLink from "../middlewares/email_handler/resetPassword.template";
-import {
-  sendOTPemail,
-} from "../middlewares/email_handler/otpEmailCalls";
 import { createTokenUser } from "../utils/createTokenUser";
-import UserOTPRecord from "../models/userOtpRecord.model";
 
 class AuthController {
   public Register = catchAsync(async (req: Request, res: Response) => {
@@ -42,104 +38,12 @@ class AuthController {
     await user.save()
 
     if (user) {
-      await sendOTPemail(user.id, UserOTPRecord);
-
       return sendSuccess(res, 201, {
         message: "Check your email for a verification otp!",
         user,
       });
     } else {
       throw new AppError("The user already exists", 400);
-    }
-  });
-
-
-  public verifyotp = catchAsync(async (req: Request, res: Response) => {
-    let { userId, otp } = req.body;
-    otp = otp.trim();
-
-    // validate input.
-
-    if (!otp) {
-      throw new AppError("Please provide OTP to proceed", 403);
-    } else if (!userId) {
-      throw new AppError("Register to get an OTP ", 401);
-    } else {
-      // verify the user
-      const userOTPrecords = await UserOTPRecord.find({ userId });
-
-      if (userOTPrecords.length <= 0) {
-        throw new Error("Account is Invalid or Already Verified");
-      } else {
-        // check expiry of OTP
-        const { expiresAt, hashedOTP } = userOTPrecords[0];
-
-        var current_time = Date.now().valueOf();
-
-        if (expiresAt.valueOf() < current_time) {
-          // Delete the OTP record if it has expired
-          await UserOTPRecord.deleteOne({ userId });
-          throw new Error("OTP has Expired, Please request a new OTP");
-        } else {
-          //OTP is Valid, verify User Email
-          // compare OTP with hashed OTP
-          const isOTPCorrect = await bcrypt.compare(otp, hashedOTP); // this returns a boolan
-
-          if (!isOTPCorrect) {
-            throw new AppError("OTP is Incorrect", 400);
-          } else {
-            // OTP is Correct Update user and delete OTP Record
-            await User.updateOne({ _id: userId }, { verifiedEmail: true });
-
-            await UserOTPRecord.deleteOne({ userId }); // Delete OTP from DB
-
-            const user = await User.findById(userId);
-
-            // send successfull registration email to client and Admin
-            // await RegisterSuccessEmail(user);
-
-            return sendSuccess(res, 201, {
-              message: "Account Verification successfull",
-            });
-          }
-        }
-      }
-    }
-  });
-  
-  public resendotp = catchAsync(async(req: Request, res: Response) => {
-    let { email } = req.body;
-    email = email?.trim();
-
-    const existingUser = await User.findOne({ email });
-
-    if (existingUser!.verifiedEmail) {
-      return res.status(403).json({ err: "You don't have need for new OTP" });
-    }
-
-    if (!email) {
-      throw new AppError("Please Enter Your Email", 401)
-    } else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
-      throw new AppError("Email is Invalid", 401);
-    } else if (!existingUser) {
-      throw new AppError("This account doesn't exist", 400);
-    } else {
-      //  Check if user has a valid OTP Previously to avaoid multiple requests
-      const existingValidOTP = await UserOTPRecord.findOne({
-        userId: existingUser._id,
-        expiresAt: { $gte: Date.now() },
-      });
-
-      if (existingValidOTP)
-        throw new AppError("Your previous OTP is still Valid, Use it", 400);
-
-      // Delete Expired OTP and Send a New One
-      await UserOTPRecord.deleteOne({ userId: existingUser.id });
-
-      //  Call the OTP Email sending function and also create new OTP record
-      await sendOTPemail(existingUser.id, UserOTPRecord);
-
-      return sendSuccess(res, 200, {message:"Check your email for a verification otp!"})
     }
   });
 
@@ -165,7 +69,6 @@ class AuthController {
     });
     
   });
-
   public forgotPassword = catchAsync(async (req: Request, res: Response) => {
     const resetLink = passLink;
     const { email } = req.body;
