@@ -48,7 +48,7 @@ This application is a TypeScript-based platform that handles user authentication
 * Copy code
 * PORT=your server Port
 * DB_URL= MongoDB Connection URI
-* JWT_SECRET=<Your JWT Secret>
+* JWT_SECRET=Your JWT Secret>
 * PAYSTACK_SECRET_KEY=Your Paystack Secret Key
 * PAYSTACK_PUBLIC_KEY=Your Paystack public key
 * JWT_EXPIRES_IN=Auth Code Expiration Time
