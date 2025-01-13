@@ -44,7 +44,6 @@ This application is a TypeScript-based platform that handles user authentication
 - cd repository-name
 - Install dependencies:
 # Environment Variables
-- Environment Variables
 * Create a .env file in the project root and include the following variables:
 * Copy code
 * PORT=your server Port
