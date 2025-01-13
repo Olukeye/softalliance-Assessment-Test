@@ -23,7 +23,7 @@ This application is a TypeScript-based platform that handles user authentication
 - Manage inventory items through authenticated Create, Read, Update, and Delete operations.
 ## Payments:
 - Payments API Integration
-- Integration with payment gateways like Paystack or Flutterwave (FLW) to handle transactions.
+- Integration with payment gateways like Paystack to handle transactions.
 - Easy account creation and access to keys.
 - Payment processing for goods and services.
 ## Webhook:
@@ -43,9 +43,7 @@ This application is a TypeScript-based platform that handles user authentication
 - git clone https://github.com/Olukeye/softalliance-Assessment-Test.git
 - cd repository-name
 - Install dependencies:
-# bash
-- Copy code
-- npm install
+# Environment Variables
 - Environment Variables
 * Create a .env file in the project root and include the following variables:
 * Copy code
@@ -72,13 +70,10 @@ bash
 Copy code
 docker run -p 3000:3000 --env-file .env application-name
 ```
-
-
-
 ## Code Repository
 The application source code is available at:
 GitHub Repository
 
 Contributions
-Contributions are not welcome welcome! This is a test assessment projrct.
+Contributions are not welcome welcome! This is a test assessment project.
 
